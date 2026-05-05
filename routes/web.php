@@ -137,14 +137,10 @@ use Illuminate\Support\Facades\Artisan;
 
 Route::get('/run-setup', function () {
     try {
-        // تنظيف الذاكرة المؤقتة
-        Artisan::call('config:clear');
-        // توليد مفتاح الحماية
-        Artisan::call('key:generate', ['--force' => true]);
-        // بناء الجداول في قاعدة البيانات
+        // قمنا بمسح أمر key:generate والإبقاء على بناء الجداول فقط
         Artisan::call('migrate', ['--force' => true]);
 
-        return '🎉 تمت المهمة الهندسية بنجاح! تم إنشاء الجداول، يمكنك الآن العودة للصفحة الرئيسية.';
+        return '🎉 تمت المهمة! تم بناء جميع الجداول بنجاح.';
     } catch (\Exception $e) {
         return 'حدث خطأ: ' . $e->getMessage();
     }
