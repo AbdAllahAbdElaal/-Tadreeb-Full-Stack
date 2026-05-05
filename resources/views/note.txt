@@ -1,0 +1,2 @@
+edit in plan migration and model and controller and new folder for plan views and add crud.js file
+and make create operation on members and plans
