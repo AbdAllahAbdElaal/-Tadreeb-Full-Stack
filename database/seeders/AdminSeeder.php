@@ -17,10 +17,9 @@ class AdminSeeder extends Seeder
         Member::updateOrCreate(
             ['email' => 'admin@tadreeb.com'], // البحث بهذا الإيميل
             [
-                'name' => 'مدير النظام',
+                'username' => 'مدير النظام',
                 'password' => Hash::make('admin123456'), // كلمة المرور
                 'role' => 'admin', // تأكد من أن هذا العمود موجود في جدولك
-                'status' => 'active',
             ]
         );
 }
