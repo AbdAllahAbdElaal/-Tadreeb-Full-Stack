@@ -137,12 +137,15 @@ use Illuminate\Support\Facades\Artisan;
 
 Route::get('/run-setup', function () {
     try {
-        // قمنا بمسح أمر key:generate والإبقاء على بناء الجداول فقط
+        // 1. بناء الجداول (في حال وجود تحديثات)
         Artisan::call('migrate', ['--force' => true]);
 
-        return '🎉 تمت المهمة! تم بناء جميع الجداول بنجاح.';
+        // 2. إضافة البيانات الأساسية (حساب الأدمن)
+        Artisan::call('db:seed', ['--force' => true]);
+
+        return '🎉 تمت المهمة! تم بناء الجداول وإضافة حساب الأدمن بنجاح. يمكنك الآن تسجيل الدخول بـ admin@tadreeb.com';
     } catch (\Exception $e) {
-        return 'حدث خطأ: ' . $e->getMessage();
+        return 'حدث خطأ أثناء الإعداد: ' . $e->getMessage();
     }
 });
 
